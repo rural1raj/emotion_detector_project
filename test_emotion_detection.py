@@ -3,9 +3,25 @@ from EmotionDetection import emotion_detector
 
 class TestEmotionDetector(unittest.TestCase):
 
-    def test_emotion(self):
-        result = emotion_detector("I am happy")
+    def test_anger(self):
+        result = emotion_detector("I am really mad about this")
+        self.assertEqual(result["dominant_emotion"], "anger")
+
+    def test_disgust(self):
+        result = emotion_detector("I feel disgusted")
+        self.assertEqual(result["dominant_emotion"], "disgust")
+
+    def test_fear(self):
+        result = emotion_detector("I am afraid of this")
+        self.assertEqual(result["dominant_emotion"], "fear")
+
+    def test_joy(self):
+        result = emotion_detector("I am very happy today")
         self.assertEqual(result["dominant_emotion"], "joy")
+
+    def test_sadness(self):
+        result = emotion_detector("I am sad about this")
+        self.assertEqual(result["dominant_emotion"], "sadness")
 
 if __name__ == "__main__":
     unittest.main()
