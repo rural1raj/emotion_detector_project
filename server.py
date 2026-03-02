@@ -1,11 +1,11 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from EmotionDetection import emotion_detector
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Emotion Detector Running"
+    return render_template("index.html")
 
 @app.route("/emotionDetector")
 def detect_emotion():
@@ -14,9 +14,9 @@ def detect_emotion():
     if text_to_analyze.strip() == "":
         return "Invalid input! Please enter some text."
 
-    result = emotion_detector(text_to_analyze)
+    response = emotion_detector(text_to_analyze)
 
-    return str(result)
+    return str(response)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
